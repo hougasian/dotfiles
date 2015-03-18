@@ -131,6 +131,7 @@ function lowercase()  # move filenames to lowercase
 
 # compile sass 
 # prerequisites: SASS gem; $gem install sass; MUST be in project $DIR
+# NOTE: DEPRICATED > Grunt
 alias watch:s="echo 'Watching /stylesheets/sass/*.scss and outputting to /stylesheets/*.css' && sass --watch stylesheets/sass:stylesheets" 
 alias watch:c="echo 'Watching /javascripts/coffee/*.coffee and outputting to /javascripts/*.js' && coffee -o javascripts -cw javascripts/coffee"
 
