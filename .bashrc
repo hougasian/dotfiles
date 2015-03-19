@@ -117,14 +117,14 @@ alias showBlocked='sudo ipfw list'                  # showBlocked:  All ipfw rul
  
 # Display useful host related informaton
 ii() {
-    echo -e "\nYou are logged on ${GREEN}$HOSTNAME${NOCOLOR}"
+    echo -e "\nYou are logged on ${LIGHT_GREEN}$HOSTNAME${NOCOLOR}"
     echo -e "\nAdditionnal information:$NOCOLOR " ; uname -a
-    echo -e "\n${RED}Users logged on:$NOCOLOR " ; w -h
-    echo -e "\n${RED}Current date :$NOCOLOR " ; date
-    echo -e "\n${RED}Machine stats :$NOCOLOR " ; uptime
-    echo -e "\n${RED}Current network location :$NOCOLOR " ; scselect
-    echo -e "\n${RED}Public facing IP Address :$NOCOLOR " ;ip
-    echo -e "\n${RED}DNS Configuration:$NC " ; scutil --dns
+    echo -e "\n${LIGHT_RED}Users logged on:$NOCOLOR " ; w -h
+    echo -e "\n${LIGHT_RED}Current date :$NOCOLOR " ; date
+    echo -e "\n${LIGHT_RED}Machine stats :$NOCOLOR " ; uptime
+    echo -e "\n${LIGHT_RED}Current network location :$NOCOLOR " ; scselect
+    echo -e "\n${LIGHT_RED}Public facing IP Address :$NOCOLOR " ;ip
+    echo -e "\n${LIGHT_RED}DNS Configuration:$NC " ; scutil --dns
     echo
 }
 
