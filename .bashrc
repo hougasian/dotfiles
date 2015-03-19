@@ -36,6 +36,7 @@ export LESS_TERMCAP_so=$'\E[01;44;33m'        # begin standout-mode - info box
 export LESS_TERMCAP_ue=$'\E'${NOCOLOR:4}      # end underline
 export LESS_TERMCAP_us=$'\E'${LIGHT_GREEN:4}  # begin underline
 
+# http://osxdaily.com/2012/02/21/add-color-to-the-terminal-in-mac-os-x/
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 
@@ -117,8 +118,8 @@ alias showBlocked='sudo ipfw list'                  # showBlocked:  All ipfw rul
  
 # Display useful host related informaton
 ii() {
-    echo -e "\nYou are logged on ${LIGHT_GREEN}$HOSTNAME${NOCOLOR}"
-    echo -e "\nAdditionnal information:$NOCOLOR " ; uname -a
+    echo -e "\nYou are logged on ${CYAN}$HOSTNAME${NOCOLOR}"
+    echo -e "\n${LIGHT_RED}Additionnal information:$NOCOLOR " ; uname -a
     echo -e "\n${LIGHT_RED}Users logged on:$NOCOLOR " ; w -h
     echo -e "\n${LIGHT_RED}Current date :$NOCOLOR " ; date
     echo -e "\n${LIGHT_RED}Machine stats :$NOCOLOR " ; uptime
