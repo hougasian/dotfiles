@@ -84,8 +84,7 @@ alias ~="cd ~"
 # reloads the prompt, usefull to take new modifications into account
 alias reload="source ~/.bashrc"
 # grabs the latest .bash_profile file and reloads the prompt
-alias updatebashrc="curl https://raw.github.com/hougasian/dotfiles/master/.bashrc > ~/.bashrc && reload"
-
+alias updatebashrc="curl https://raw.githubusercontent.com/hougasian/dotfiles/master/.bashrc > ~/.bashrc && reload"
 
 # Memory / Environment
 # ---------------------------------------------------------------------
