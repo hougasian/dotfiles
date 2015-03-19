@@ -8,11 +8,13 @@ if [ $UID -ne 0 ]; then
   alias osmkill='dscacheutil -flushcache;sudo killall -HUP mDNSResponder' # OS X 10.9 Mavericks
 fi
 
-# ls 
+# Directory control 
+# ---------------------------------------------------------------------
+
 alias ls='ls -GhF'                  # linux: --color=auto; Mac: -G 
 alias lr='ls -R'                    # recursive ls
-alias ll='ls -l'
-alias la='ll -A'
+alias ll='ls -lG'
+alias la='ll -AG'    
 alias lx='ll -BX'                   # sort by extension
 alias lz='ll -rS'                   # sort by size
 alias lt='ll -rt'                   # sort by date
@@ -40,17 +42,22 @@ alias mv='mv -i'
 alias du='du -kh'       # a more readable output.
 alias df='df -kTh'
 
-
 # Make Bash nicer 
 alias :q=' exit'
 alias :Q=' exit'
 alias :x=' exit'
 alias ..='cd ..'
 alias ...='cd ../..'
+alias ~="cd ~"
 
-# OS X VNC
-alias vnc='/System/Library/CoreServices/Screen\ Sharing.app/Contents/MacOS/Screen\ Sharing'
+# reloads the prompt, usefull to take new modifications into account
+alias reload="source ~/.bashrc"
+# grabs the latest .bash_profile file and reloads the prompt
+alias updatebashrc="curl https://raw.github.com/hougasian/dotfiles/master/.bashrc > ~/.bashrc && reload"
 
+
+# Memory / Environment
+# ---------------------------------------------------------------------
 # Memory
 alias meminfo='free -m -l -t' # pass options to free 
  
@@ -67,14 +74,61 @@ alias cpuinfo='lscpu' # Get server cpu info
 # get GPU ram on desktop / laptop## 
 alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
 
-# Development; edit vhost, hosts and fast access to our local web root
-# remember OS X; Permissions issues in web root?
-# $ sudo chmod -R o+w /Library/WebServer/Documents 
-alias vhosts='sudo vim /etc/apache2/extra/httpd-vhosts.conf'
-alias hosts='sudo vim /etc/hosts'
-alias home='cd /Library/WebServer/Documents'
 
-# --------- Functions to make life easier 
+# Network
+# ---------------------------------------------------------------------
+
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com" # your public ip
+alias localip="ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"  # your local ip
+alias lsnet='sudo lsof -i'                          # lsnet:        Show all open TCP/IP sockets
+alias flushDNS='dscacheutil -flushcache'            # flushDNS:     Flush out the DNS Cache
+alias openPorts='sudo lsof -i | grep LISTEN'        # openPorts:    All listening connections
+alias showBlocked='sudo ipfw list'                  # showBlocked:  All ipfw rules inc/ blocked IPs
+ 
+# Display useful host related informaton
+ii() {
+    echo -e "\nYou are logged on ${GREEN}$HOSTNAME${NOCOLOR}"
+    echo -e "\nAdditionnal information:$NOCOLOR " ; uname -a
+    echo -e "\n${RED}Users logged on:$NOCOLOR " ; w -h
+    echo -e "\n${RED}Current date :$NOCOLOR " ; date
+    echo -e "\n${RED}Machine stats :$NOCOLOR " ; uptime
+    echo -e "\n${RED}Current network location :$NOCOLOR " ; scselect
+    echo -e "\n${RED}Public facing IP Address :$NOCOLOR " ;myip
+    #echo -e "\n${RED}DNS Configuration:$NC " ; scutil --dns
+    echo
+}
+
+
+# Quality of life in the terminal
+# ---------------------------------------------------------------------
+
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
+
+# tab completion for ssh hosts
+if [ -f ~/.ssh/known_hosts ]; then
+    complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g | uniq | grep -v "\["`;)" ssh
+fi
+ 
+# Tab complete for sudo
+complete -cf sudo
+
+gzipsize(){
+	echo $((`gzip -c $1 | wc -c`/1024))"KB"
+}
+
+# Find files and ignore directories
+ff(){
+  find . -iname $1 | grep -v .svn | grep -v .sass-cache
+}
+
+fif(){
+	if [ "$#" -eq 1 ]; then
+		grep -nr $1 . --color
+	else
+		s `grep -nr $1 . | sed -n $2p | cut -d: -f-2`
+	fi
+}
 
 # cd and ls in one
 cl() {
@@ -86,7 +140,7 @@ if [ -d "$1" ]; then
 fi
 }
 
-function extract()      # Handy Extract Program.
+extract()      # Handy Extract Program.
 {
      if [ -f $1 ] ; then
          case $1 in
@@ -108,7 +162,7 @@ function extract()      # Handy Extract Program.
      fi
 }
 
-function lowercase()  # move filenames to lowercase
+lowercase()  # move filenames to lowercase
 {
     for file ; do
         filename=${file##*/}
@@ -127,11 +181,35 @@ function lowercase()  # move filenames to lowercase
     done
 }
 
-# --------- Rails specific
+# OS X
+# ---------------------------------------------------------------------
+
+# VNC
+alias vnc='/System/Library/CoreServices/Screen\ Sharing.app/Contents/MacOS/Screen\ Sharing'
+# disables shadow on screenshots
+# defaults write com.apple.screencapture disable-shadow -bool true
+
+alias reset-cal='rm ~/Library/Calendars/Calendar\ Cache'  # Clear iCal cache
+
+trash () { command mv "$@" ~/.Trash ; }                   # Moves a file to the MacOS trash
+ql () { qlmanage -px "$*" >& /dev/null; }                 # Opens any file in MacOS Quicklook Preview
+
+# Web Development
+# ---------------------------------------------------------------------
+
+alias ownit='sudo chmod -R o+w /Library/WebServer/Documents'
+alias vhosts='sudo vim /etc/apache2/extra/httpd-vhosts.conf'
+alias hosts='sudo vim /etc/hosts'
+alias dev='cd /Library/WebServer/Documents'
+alias a='atom'
+alias err="tail -f /var/log/apache2/error_log"
+headers () { /usr/bin/curl -I -L $@ ; }                 # Grabs headers from web page
+
+# opens up the IOS Simulator without launching xcode
+alias iossimulator="(cd /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Applications/ && open -a iPhone\ Simulator.app)"
 
 # compile sass 
 # prerequisites: SASS gem; $gem install sass; MUST be in project $DIR
-# NOTE: DEPRICATED > Grunt
 alias watch:s="echo 'Watching /stylesheets/sass/*.scss and outputting to /stylesheets/*.css' && sass --watch stylesheets/sass:stylesheets" 
 alias watch:c="echo 'Watching /javascripts/coffee/*.coffee and outputting to /javascripts/*.js' && coffee -o javascripts -cw javascripts/coffee"
 
@@ -149,3 +227,26 @@ alias solr:i='bundle exec rake sunspot:solr:reindex'
 alias routes='bundle exec rake routes'
 alias migrate='bundle exec rake db:migrate'
 alias migrate:r='bundle exec rake db:migrate:reset'
+
+# Generates a random password
+randpwd() {
+	if [ -z $1 ]; then
+		MAXSIZE=10
+	else
+		MAXSIZE=$1
+	fi
+	array1=( 
+	q w e r t y u i o p a s d f g h j k l z x c v b n m Q W E R T Y U I O P A S D 
+	F G H J K L Z X C V B N M 1 2 3 4 5 6 7 8 9 0 
+	\! \@ \$ \% \^ \& \* \! \@ \$ \% \^ \& \* \@ \$ \% \^ \& \* 
+	) 
+	MODNUM=${#array1[*]} 
+	pwd_len=0 
+	while [ $pwd_len -lt $MAXSIZE ] 
+	do 
+	    index=$(($RANDOM%$MODNUM)) 
+	    echo -n "${array1[$index]}" 
+	    ((pwd_len++)) 
+	done 
+	echo 
+}
