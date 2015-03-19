@@ -124,7 +124,7 @@ ii() {
     echo -e "\n${LIGHT_RED}Machine stats :$NOCOLOR " ; uptime
     echo -e "\n${LIGHT_RED}Current network location :$NOCOLOR " ; scselect
     echo -e "\n${LIGHT_RED}Public facing IP Address :$NOCOLOR " ;ip
-    echo -e "\n${LIGHT_RED}DNS Configuration:$NC " ; scutil --dns
+    #echo -e "\n${LIGHT_RED}DNS Configuration:$NOCOLOR " ; scutil --dns
     echo
 }
 
