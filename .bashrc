@@ -229,7 +229,7 @@ ql () { qlmanage -px "$*" >& /dev/null; }                 # Opens any file in Ma
 alias ownit='sudo chmod -R o+w /Library/WebServer/Documents'
 alias vhosts='sudo vim /etc/apache2/extra/httpd-vhosts.conf'
 alias hosts='sudo vim /etc/hosts'
-alias dev='cd /Library/WebServer/Documents'
+alias dev='cd /Library/WebServer/Documents && ls'
 alias a='atom'
 alias err="tail -f /var/log/apache2/error_log"
 headers () { /usr/bin/curl -I -L $@ ; }                 # Grabs headers from web page
