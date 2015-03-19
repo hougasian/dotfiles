@@ -8,6 +8,37 @@ if [ $UID -ne 0 ]; then
   alias osmkill='dscacheutil -flushcache;sudo killall -HUP mDNSResponder' # OS X 10.9 Mavericks
 fi
 
+# Colors
+# ------------------------------------------------------------
+export      NOCOLOR="\033[0m"
+export        BLACK="\033[0;30m"
+export    DARK_GRAY="\033[1;30m"
+export         BLUE="\033[0;34m"
+export   LIGHT_BLUE="\033[1;34m"
+export        GREEN="\033[0;32m"
+export  LIGHT_GREEN="\033[1;32m"
+export         CYAN="\033[0;36m"
+export   LIGHT_CYAN="\033[1;36m"
+export          RED="\033[0;31m"
+export    LIGHT_RED="\033[1;31m"
+export       PURPLE="\033[0;35m"
+export LIGHT_PURPLE="\033[1;35m"
+export BROWN_ORANGE="\033[0;33m"
+export       YELLOW="\033[1;33m"
+export   LIGHT_GRAY="\033[0;37m"
+export        WHITE="\033[1;37m"
+
+export LESS_TERMCAP_mb=$'\E'${RED:4}          # begin blinking
+export LESS_TERMCAP_md=$'\E'${LIGHT_RED:4}    # begin bold
+export LESS_TERMCAP_me=$'\E'${NOCOLOR:4}      # end mode
+export LESS_TERMCAP_se=$'\E'${NOCOLOR:4}      # end standout-mode
+export LESS_TERMCAP_so=$'\E[01;44;33m'        # begin standout-mode - info box
+export LESS_TERMCAP_ue=$'\E'${NOCOLOR:4}      # end underline
+export LESS_TERMCAP_us=$'\E'${LIGHT_GREEN:4}  # begin underline
+
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
+
 # Directory control 
 # ---------------------------------------------------------------------
 
@@ -93,17 +124,14 @@ ii() {
     echo -e "\n${RED}Current date :$NOCOLOR " ; date
     echo -e "\n${RED}Machine stats :$NOCOLOR " ; uptime
     echo -e "\n${RED}Current network location :$NOCOLOR " ; scselect
-    echo -e "\n${RED}Public facing IP Address :$NOCOLOR " ;myip
-    #echo -e "\n${RED}DNS Configuration:$NC " ; scutil --dns
+    echo -e "\n${RED}Public facing IP Address :$NOCOLOR " ;ip
+    echo -e "\n${RED}DNS Configuration:$NC " ; scutil --dns
     echo
 }
 
 
 # Quality of life in the terminal
 # ---------------------------------------------------------------------
-
-export CLICOLOR=1
-export LSCOLORS=ExFxBxDxCxegedabagacad
 
 # tab completion for ssh hosts
 if [ -f ~/.ssh/known_hosts ]; then
