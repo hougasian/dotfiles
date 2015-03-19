@@ -58,9 +58,9 @@ alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
  
-# Some other useful stuff
-alias ports='netstat -tulanp' # show open ports
-alias mkdir='mkdir -pv' # mkdir, create parent 
+# Other usefuls
+alias ports='netstat -tulanp' 	# show open ports
+alias mkdir='mkdir -pv' 	# mkdir, create parent 
 alias h='history'
 alias j='jobs -l'
 alias cls='clear'
@@ -119,12 +119,13 @@ alias showBlocked='sudo ipfw list'                  # showBlocked:  All ipfw rul
 # Display useful host related informaton
 ii() {
     echo -e "\nYou are logged on ${CYAN}$HOSTNAME${NOCOLOR}"
-    echo -e "\n${LIGHT_RED}Additionnal information:$NOCOLOR " ; uname -a
-    echo -e "\n${LIGHT_RED}Users logged on:$NOCOLOR " ; w -h
+    echo -e "\n${LIGHT_RED}Additionnal information :$NOCOLOR " ; uname -a
+    echo -e "\n${LIGHT_RED}Users logged on :$NOCOLOR " ; w -h
     echo -e "\n${LIGHT_RED}Current date :$NOCOLOR " ; date
     echo -e "\n${LIGHT_RED}Machine stats :$NOCOLOR " ; uptime
     echo -e "\n${LIGHT_RED}Current network location :$NOCOLOR " ; scselect
     echo -e "\n${LIGHT_RED}Public facing IP Address :$NOCOLOR " ;ip
+    echo -e "\n${LIGHT_RED}Local network IP Address :$NOCOLOR " ;ip
     #echo -e "\n${LIGHT_RED}DNS Configuration:$NOCOLOR " ; scutil --dns
     echo
 }
