@@ -1,12 +1,4 @@
-# Privileged access
-if [ $UID -ne 0 ]; then
-  alias sudo='sudo '
-  alias root='sudo -s'
-  alias reboot='sudo systemctl reboot'
-  alias netctl='sudo netctl'
-  alias osxkill='sudo killall -HUP mDNSResponder' # OS X 10.7 & 10.8
-  alias osmkill='dscacheutil -flushcache;sudo killall -HUP mDNSResponder' # OS X 10.9 Mavericks
-fi
+# .bashrc config file. See line 80 for a quick method to load and source from you github .bashrc 
 
 # Colors
 # ------------------------------------------------------------
