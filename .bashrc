@@ -43,7 +43,7 @@ alias lx='ll -BX'                   # sort by extension
 alias lz='ll -rS'                   # sort by size
 alias lt='ll -rt'                   # sort by date
 alias lm='la | more'
-alias tree='tree -Csu'     # nice alternative to 'recursive ls'; Don't have tree installed - WHY NOT?
+alias tree='tree -Csu'     	    # alternative to 'recursive ls'; Must have tree installed. For homebrew: $ brew install tree
 
 # Add some color to grep
 alias grep='grep --color=auto'
