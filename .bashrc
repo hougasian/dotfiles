@@ -122,20 +122,19 @@ ii() {
     echo
 }
 
-
 # Quality of life in the terminal
 # ---------------------------------------------------------------------
 
 # tab completion for ssh hosts
 if [ -f ~/.ssh/known_hosts ]; then
-    complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g | uniq | grep -v "\["`;)" ssh
+  complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g | uniq | grep -v "\["`;)" ssh
 fi
  
 # Tab complete for sudo
 complete -cf sudo
 
 gzipsize(){
-	echo $((`gzip -c $1 | wc -c`/1024))"KB"
+  echo $((`gzip -c $1 | wc -c`/1024))"KB"
 }
 
 # Find files and ignore directories
@@ -218,19 +217,25 @@ ql () { qlmanage -px "$*" >& /dev/null; }                 # Opens any file in Ma
 # Web Development
 # ---------------------------------------------------------------------
 
-alias ownit='sudo chmod -R o+w /Library/WebServer/Documents'
-alias vhosts='sudo vim /etc/apache2/extra/httpd-vhosts.conf'
-alias hosts='sudo vim /etc/hosts'
-alias dev='cd /Library/WebServer/Documents && cls && ll'
-alias a='atom'
-alias err="tail -f /var/log/apache2/error_log"
-headers () { /usr/bin/curl -I -L $@ ; }                 # Grabs headers from web page
+alias ownit='sudo chmod -R o+w /Library/WebServer/Documents'	# ownership of WebServer docs folders
+alias vhosts='sudo vim /etc/apache2/extra/httpd-vhosts.conf'	# edit vhosts file
+alias hosts='sudo vim /etc/hosts'				# edit hosts file
+alias dev='cd /Library/WebServer/Documents && cls && ll'	# switch into dev folder and show directory
+alias a='atom'							# quickly launch Atom (https://atom.io/)
+alias err="tail -f /var/log/apache2/error_log"			# quickly tail apache error log
+headers () { /usr/bin/curl -I -L $@ ; }                 	# Grabs headers from web page
 
 # opens up the IOS Simulator without launching xcode
 alias iossimulator="(cd /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Applications/ && open -a iPhone\ Simulator.app)"
 
-# compile sass 
-# prerequisites: SASS gem; $gem install sass; MUST be in project $DIR
+# Frameworks
+# Must be in project $dir
+alias jk='jekyll serve --watch'		# starts Jekyll server at http://localhost:4000
+alias mt='meteor'			# starts Meteor server at http://localhost:3000		
+
+# Sass and coffee
+# prerequisites: SASS gem; $ gem install sass
+# Must be in project $dir
 alias watch:s="echo 'Watching /stylesheets/sass/*.scss and outputting to /stylesheets/*.css' && sass --watch stylesheets/sass:stylesheets" 
 alias watch:c="echo 'Watching /javascripts/coffee/*.coffee and outputting to /javascripts/*.js' && coffee -o javascripts -cw javascripts/coffee"
 
