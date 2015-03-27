@@ -224,7 +224,6 @@ alias dev='cd /Library/WebServer/Documents && cls && ll'	# switch into dev folde
 alias a='atom'							# quickly launch Atom (https://atom.io/)
 alias err="tail -f /var/log/apache2/error_log"			# quickly tail apache error log
 headers () { /usr/bin/curl -I -L $@ ; }                 	# Grabs headers from web page
-devc () {dev; echo "cd ";}					# switch to dev folder and start 'cd'	
 
 # opens up the IOS Simulator without launching xcode
 alias iossimulator="(cd /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Applications/ && open -a iPhone\ Simulator.app)"
