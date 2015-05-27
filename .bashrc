@@ -212,7 +212,7 @@ alias vnc='/System/Library/CoreServices/Screen\ Sharing.app/Contents/MacOS/Scree
 alias reset-cal='rm ~/Library/Calendars/Calendar\ Cache'  # Clear iCal cache
 
 # Photoshop open a file
-alias psd='/Applications/Adobe\ Photoshop\ CS6/Adobe\ Photoshop\ CS6.app/'
+alias psd='open -a /Applications/Adobe\ Photoshop\ CS6/Adobe\ Photoshop\ CS6.app/'
 
 trash () { command mv "$@" ~/.Trash ; }                   # Moves a file to the MacOS trash
 ql () { qlmanage -px "$*" >& /dev/null; }                 # Opens any file in MacOS Quicklook Preview
