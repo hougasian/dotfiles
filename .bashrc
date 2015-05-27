@@ -211,6 +211,9 @@ alias vnc='/System/Library/CoreServices/Screen\ Sharing.app/Contents/MacOS/Scree
 
 alias reset-cal='rm ~/Library/Calendars/Calendar\ Cache'  # Clear iCal cache
 
+# Photoshop open a file
+alias psd='/Applications/Adobe\ Photoshop\ CS6/Adobe\ Photoshop\ CS6.app/'
+
 trash () { command mv "$@" ~/.Trash ; }                   # Moves a file to the MacOS trash
 ql () { qlmanage -px "$*" >& /dev/null; }                 # Opens any file in MacOS Quicklook Preview
 
@@ -224,9 +227,6 @@ alias dev='cd /Library/WebServer/Documents && cls && ll'	# switch into dev folde
 alias a='atom'							# quickly launch Atom (https://atom.io/)
 alias err="tail -f /var/log/apache2/error_log"			# quickly tail apache error log
 headers () { /usr/bin/curl -I -L $@ ; }                 	# Grabs headers from web page
-
-# opens up the IOS Simulator without launching xcode
-alias iossimulator="(cd /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Applications/ && open -a iPhone\ Simulator.app)"
 
 # Frameworks
 # Must be in project $dir
