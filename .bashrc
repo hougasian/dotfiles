@@ -215,7 +215,7 @@ alias reset-cal='rm ~/Library/Calendars/Calendar\ Cache'  # Clear iCal cache
 alias psd='open -a /Applications/Adobe\ Photoshop\ CS6/Adobe\ Photoshop\ CS6.app/'
 
 # MacDown (markup editor)
-alias md='open -a $ /Applications/MacDown.app/'
+alias md='open -a /Applications/MacDown.app/'
 
 trash () { command mv "$@" ~/.Trash ; }                   # Moves a file to the MacOS trash
 ql () { qlmanage -px "$*" >& /dev/null; }                 # Opens any file in MacOS Quicklook Preview
