@@ -214,6 +214,9 @@ alias reset-cal='rm ~/Library/Calendars/Calendar\ Cache'  # Clear iCal cache
 # Photoshop open a file
 alias psd='open -a /Applications/Adobe\ Photoshop\ CS6/Adobe\ Photoshop\ CS6.app/'
 
+# MacDown (markup editor)
+alias md='open -a $ /Applications/MacDown.app/'
+
 trash () { command mv "$@" ~/.Trash ; }                   # Moves a file to the MacOS trash
 ql () { qlmanage -px "$*" >& /dev/null; }                 # Opens any file in MacOS Quicklook Preview
 
@@ -225,6 +228,7 @@ alias vhosts='sudo vim /etc/apache2/extra/httpd-vhosts.conf'	# edit vhosts file
 alias hosts='sudo vim /etc/hosts'				# edit hosts file
 alias dev='cd /Library/WebServer/Documents && cls && ll'	# switch into dev folder and show directory
 alias a='atom'							# quickly launch Atom (https://atom.io/)
+alias sub='open -a /Applications/Sublime\ Text.app/'            # quickly open SUblime Text (sorry Atom, you need to be faster!!)
 alias err="tail -f /var/log/apache2/error_log"			# quickly tail apache error log
 headers () { /usr/bin/curl -I -L $@ ; }                 	# Grabs headers from web page
 
