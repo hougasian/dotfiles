@@ -1,4 +1,4 @@
-# .bashrc config file. See line 80 for a quick method to load and source from you github .bashrc 
+# .bashrc config file. See line 80 for a quick method to load and source from you github .bashrc
 
 # Colors
 # ------------------------------------------------------------
@@ -32,13 +32,13 @@ export LESS_TERMCAP_us=$'\E'${LIGHT_GREEN:4}  # begin underline
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 
-# Directory control 
+# Directory control
 # ---------------------------------------------------------------------
 
-alias ls='ls -GhF'                  # linux: --color=auto; Mac: -G 
+alias ls='ls -GhF'                  # linux: --color=auto; Mac: -G
 alias lr='ls -R'                    # recursive ls
 alias ll='ls -lG'
-alias la='ll -AG'    
+alias la='ll -AG'
 alias lx='ll -BX'                   # sort by extension
 alias lz='ll -rS'                   # sort by size
 alias lt='ll -rt'                   # sort by date
@@ -49,10 +49,10 @@ alias tree='tree -Csu'     	    # alternative to 'recursive ls'; Must have tree 
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
- 
+
 # Other usefuls
 alias ports='netstat -tulanp' 	# show open ports
-alias mkdir='mkdir -pv' 	# mkdir, create parent 
+alias mkdir='mkdir -pv' 	# mkdir, create parent
 alias h='history'
 alias j='jobs -l'
 alias cls='clear'
@@ -66,7 +66,7 @@ alias mv='mv -i'
 alias du='du -kh'       # a more readable output.
 alias df='df -kTh'
 
-# Make Bash nicer 
+# Make Bash nicer
 alias :q=' exit'
 alias :Q=' exit'
 alias :x=' exit'
@@ -82,19 +82,19 @@ alias updatebashrc="curl https://raw.githubusercontent.com/hougasian/dotfiles/ma
 # Memory / Environment
 # ---------------------------------------------------------------------
 # Memory
-alias meminfo='free -m -l -t' # pass options to free 
- 
+alias meminfo='free -m -l -t' # pass options to free
+
 # get top process eating memory
 alias psmem='ps auxf | sort -nr -k 4'
 alias psmem10='ps auxf | sort -nr -k 4 | head -10'
- 
-# get top process eating cpu 
+
+# get top process eating cpu
 alias pscpu='ps auxf | sort -nr -k 3'
 alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
- 
+
 alias cpuinfo='lscpu' # Get server cpu info
- 
-# get GPU ram on desktop / laptop## 
+
+# get GPU ram on desktop / laptop##
 alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
 
 
@@ -107,19 +107,19 @@ alias lsnet='sudo lsof -i'                          # lsnet:        Show all ope
 alias flushDNS='dscacheutil -flushcache'            # flushDNS:     Flush out the DNS Cache
 alias openPorts='sudo lsof -i | grep LISTEN'        # openPorts:    All listening connections
 alias showBlocked='sudo ipfw list'                  # showBlocked:  All ipfw rules inc/ blocked IPs
- 
+
 # Display useful host related informaton
 ii() {
-    echo -e "\nYou are logged on ${CYAN}$HOSTNAME${NOCOLOR}"
-    echo -e "\n${LIGHT_RED}Additionnal information :$NOCOLOR " ; uname -a
-    echo -e "\n${LIGHT_RED}Users logged on :$NOCOLOR " ; w -h
-    echo -e "\n${LIGHT_RED}Current date :$NOCOLOR " ; date
-    echo -e "\n${LIGHT_RED}Machine stats :$NOCOLOR " ; uptime
-    echo -e "\n${LIGHT_RED}Current network location :$NOCOLOR " ; scselect
-    echo -e "\n${LIGHT_RED}Public facing IP Address :$NOCOLOR " ;ip
-    echo -e "\n${LIGHT_RED}Local network IP Address :$NOCOLOR " ;ip
-    #echo -e "\n${LIGHT_RED}DNS Configuration:$NOCOLOR " ; scutil --dns
-    echo
+  echo -e "\nYou are logged on ${CYAN}$HOSTNAME${NOCOLOR}"
+  echo -e "\n${LIGHT_RED}Additionnal information :$NOCOLOR " ; uname -a
+  echo -e "\n${LIGHT_RED}Users logged on :$NOCOLOR " ; w -h
+  echo -e "\n${LIGHT_RED}Current date :$NOCOLOR " ; date
+  echo -e "\n${LIGHT_RED}Machine stats :$NOCOLOR " ; uptime
+  echo -e "\n${LIGHT_RED}Current network location :$NOCOLOR " ; scselect
+  echo -e "\n${LIGHT_RED}Public facing IP Address :$NOCOLOR " ;ip
+  echo -e "\n${LIGHT_RED}Local network IP Address :$NOCOLOR " ;ip
+  #echo -e "\n${LIGHT_RED}DNS Configuration:$NOCOLOR " ; scutil --dns
+  echo
 }
 
 # Quality of life in the terminal
@@ -129,20 +129,20 @@ ii() {
 if [ -f ~/.ssh/known_hosts ]; then
   complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g | uniq | grep -v "\["`;)" ssh
 fi
- 
+
 # Tab complete for sudo
 complete -cf sudo
 
-gzipsize(){
+gzipsize() {
   echo $((`gzip -c $1 | wc -c`/1024))"KB"
 }
 
 # Find files and ignore directories
-ff(){
+ff() {
   find . -iname $1 | grep -v .svn | grep -v .sass-cache
 }
 
-fif(){
+fif() {
 	if [ "$#" -eq 1 ]; then
 		grep -nr $1 . --color
 	else
@@ -160,45 +160,43 @@ if [ -d "$1" ]; then
 fi
 }
 
-extract()      # Handy Extract Program.
-{
-     if [ -f $1 ] ; then
-         case $1 in
-             *.tar.bz2)   tar xvjf $1     ;;
-             *.tar.gz)    tar xvzf $1     ;;
-             *.bz2)       bunzip2 $1      ;;
-             *.rar)       unrar x $1      ;;
-             *.gz)        gunzip $1       ;;
-             *.tar)       tar xvf $1      ;;
-             *.tbz2)      tar xvjf $1     ;;
-             *.tgz)       tar xvzf $1     ;;
-             *.zip)       unzip $1        ;;
-             *.Z)         uncompress $1   ;;
-             *.7z)        7z x $1         ;;
-             *)           echo "'$1' cannot be extracted via >extract<" ;;
-         esac
-     else
-         echo "'$1' is not a valid file"
-     fi
+extract() {     # Handy Extract Program.
+  if [ -f $1 ] ; then
+     case $1 in
+       *.tar.bz2)   tar xvjf $1     ;;
+       *.tar.gz)    tar xvzf $1     ;;
+       *.bz2)       bunzip2 $1      ;;
+       *.rar)       unrar x $1      ;;
+       *.gz)        gunzip $1       ;;
+       *.tar)       tar xvf $1      ;;
+       *.tbz2)      tar xvjf $1     ;;
+       *.tgz)       tar xvzf $1     ;;
+       *.zip)       unzip $1        ;;
+       *.Z)         uncompress $1   ;;
+       *.7z)        7z x $1         ;;
+       *)           echo "'$1' cannot be extracted via >extract<" ;;
+     esac
+  else
+     echo "'$1' is not a valid file"
+  fi
 }
 
-lowercase()  # move filenames to lowercase
-{
-    for file ; do
-        filename=${file##*/}
-        case "$filename" in
-        */*) dirname==${file%/*} ;;
-        *) dirname=.;;
-        esac
-        nf=$(echo $filename | tr A-Z a-z)
-        newname="${dirname}/${nf}"
-        if [ "$nf" != "$filename" ]; then
-            mv "$file" "$newname"
-            echo "lowercase: $file --> $newname"
-        else
-            echo "lowercase: $file not changed."
-        fi
-    done
+lowercase() {  # move filenames to lowercase
+  for file ; do
+    filename=${file##*/}
+    case "$filename" in
+    */*) dirname==${file%/*} ;;
+    *) dirname=.;;
+    esac
+    nf=$(echo $filename | tr A-Z a-z)
+    newname="${dirname}/${nf}"
+    if [ "$nf" != "$filename" ]; then
+      mv "$file" "$newname"
+      echo "lowercase: $file --> $newname"
+    else
+      echo "lowercase: $file not changed."
+    fi
+  done
 }
 
 # OS X
@@ -212,13 +210,37 @@ alias vnc='/System/Library/CoreServices/Screen\ Sharing.app/Contents/MacOS/Scree
 alias reset-cal='rm ~/Library/Calendars/Calendar\ Cache'  # Clear iCal cache
 
 # Photoshop open a file
-alias psd='open -a /Applications/Adobe\ Photoshop\ CS6/Adobe\ Photoshop\ CS6.app/'
+alias psd='open -a /Applications/Adobe\ Photoshop\ CC\ 2015/Adobe\ Photoshop\ CC\ 2015.app/'
 
 # MacDown (markup editor)
 alias md='open -a /Applications/MacDown.app/'
 
 trash () { command mv "$@" ~/.Trash ; }                   # Moves a file to the MacOS trash
 ql () { qlmanage -px "$*" >& /dev/null; }                 # Opens any file in MacOS Quicklook Preview
+
+# Open iPhone simulators; must have xcode 6.1+ installed
+iphone () {
+  if [ -n $1 ] ; then
+    case $1 in
+      4s)   xcrun instruments -w 'iPhone $1 (8.3 Simulator) [DCC7F42A-3774-4531-8681-7EDC7D7D8E1D]'  ;;
+      5)    xcrun instruments -w 'iPhone $1 (8.3 Simulator) [454CC627-12C0-47AD-B6FD-296BB46FF0BC]'  ;;
+      5s)   xcrun instruments -w 'iPhone $1 (8.3 Simulator) [148761C4-7B39-460D-9B6B-D60AEFB18FE3]'  ;;
+      6)    xcrun instruments -w 'iPhone $1 (8.3 Simulator) [37072F39-8077-43F6-BBCD-B710B758C58D]'  ;;
+      *)    echo "Please enter an iPhone model; 4s, 5, 5s, 6"
+    esac
+  fi
+}
+
+ipad () {
+  if [ -n $1 ] ; then
+    case $1 in
+      2)        xcrun instruments -w 'iPad 2 (8.3 Simulator) [6D7DA9B5-4289-4E89-A0AA-BD298AAF17A1]'      ;;
+      air)      xcrun instruments -w 'iPad Air (8.3 Simulator) [926C0C35-8874-43B8-943A-070F6587930E]'    ;;
+      retina)   xcrun instrumnets -w 'iPad Retina (8.3 Simulator) [701C47F0-C6FB-43AF-BFF0-0A782A152F20]' ;;
+      *)        echo "Please enter an iPad model; 2, Air, Retina"
+    esac
+  fi
+}
 
 # Web Development
 # ---------------------------------------------------------------------
@@ -235,12 +257,12 @@ headers () { /usr/bin/curl -I -L $@ ; }                 	# Grabs headers from we
 # Frameworks
 # Must be in project $dir
 alias jk='jekyll serve --watch'		# starts Jekyll server at http://localhost:4000
-alias mt='meteor'			# starts Meteor server at http://localhost:3000		
+alias mt='meteor'			# starts Meteor server at http://localhost:3000
 
 # Sass and coffee
 # prerequisites: SASS gem; $ gem install sass
 # Must be in project $dir
-alias watch:s="echo 'Watching /stylesheets/sass/*.scss and outputting to /stylesheets/*.css' && sass --watch stylesheets/sass:stylesheets" 
+alias watch:s="echo 'Watching /stylesheets/sass/*.scss and outputting to /stylesheets/*.css' && sass --watch stylesheets/sass:stylesheets"
 alias watch:c="echo 'Watching /javascripts/coffee/*.coffee and outputting to /javascripts/*.js' && coffee -o javascripts -cw javascripts/coffee"
 
 # ruby/rails testing
@@ -265,18 +287,18 @@ randpwd() {
 	else
 		MAXSIZE=$1
 	fi
-	array1=( 
-	q w e r t y u i o p a s d f g h j k l z x c v b n m Q W E R T Y U I O P A S D 
-	F G H J K L Z X C V B N M 1 2 3 4 5 6 7 8 9 0 
-	\! \@ \$ \% \^ \& \* \! \@ \$ \% \^ \& \* \@ \$ \% \^ \& \* 
-	) 
-	MODNUM=${#array1[*]} 
-	pwd_len=0 
-	while [ $pwd_len -lt $MAXSIZE ] 
-	do 
-	    index=$(($RANDOM%$MODNUM)) 
-	    echo -n "${array1[$index]}" 
-	    ((pwd_len++)) 
-	done 
-	echo 
+	array1=(
+	q w e r t y u i o p a s d f g h j k l z x c v b n m Q W E R T Y U I O P A S D
+	F G H J K L Z X C V B N M 1 2 3 4 5 6 7 8 9 0
+	\! \@ \$ \% \^ \& \* \! \@ \$ \% \^ \& \* \@ \$ \% \^ \& \*
+	)
+	MODNUM=${#array1[*]}
+	pwd_len=0
+	while [ $pwd_len -lt $MAXSIZE ]
+	do
+    index=$(($RANDOM%$MODNUM))
+    echo -n "${array1[$index]}"
+    ((pwd_len++))
+	done
+	echo
 }
