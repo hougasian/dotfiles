@@ -39,8 +39,6 @@ alias ~="cd ~"
 
 # reloads the prompt, usefull to take new modifications into account
 alias reload="source ~/.bashrc"
-# grabs the latest .bash_profile file and reloads the prompt
-alias updatebashrc="curl https://raw.githubusercontent.com/hougasian/dotfiles/master/.bashrc > ~/.bashrc && reload"
 
 # Memory
 alias meminfo='free -m -l -t' # pass options to free
@@ -72,9 +70,6 @@ alias vnc='/System/Library/CoreServices/Screen\ Sharing.app/Contents/MacOS/Scree
 # disables shadow on screenshots
 # defaults write com.apple.screencapture disable-shadow -bool true
 
-# Photoshop open a file
-alias psd='open -a /Applications/Adobe\ Photoshop\ CC\ 2015/Adobe\ Photoshop\ CC\ 2015.app/'
-
 # MacDown (markup editor)
 alias md='open -a /Applications/MacDown.app/'
 
@@ -83,7 +78,3 @@ alias vhosts='sudo vim /etc/apache2/extra/httpd-vhosts.conf'	# edit vhosts file
 alias hosts='sudo vim /etc/hosts'				# edit hosts file
 alias a='atom'							# quickly launch Atom (https://atom.io/)
 alias err="tail -f /var/log/apache2/error_log"			# quickly tail apache error log
-
-# Must be in project $dir
-alias jk='jekyll serve --watch'		# starts Jekyll server at http://localhost:4000
-alias mt='meteor'			# starts Meteor server at http://localhost:3000

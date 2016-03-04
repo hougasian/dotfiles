@@ -125,3 +125,20 @@ dev() {
   clear
   ll
 }
+
+# grabs the latest .bash_profile file and reloads the prompt
+updatebash() {
+  git clone https://github.com/hougasian/dotfiles.git
+  mv dotfiles/.* .*
+  rm -rf dotfiles
+  echo "dotfiles reloaded."
+}
+
+# Load Jekyll with 'future' and load local config if exists
+jkf() {
+  if [ -f _config.local.yml ]; then
+    jekyll s --config _config.yml,_config.local.yml --future
+  else
+    jekyll s --future
+  fi
+}
